@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bolas</title>
+  </head>
+  <body>
+    <h3>Bolas - Socket</h3>
+    <canvas
+      id="canvas"
+      width="600"
+      height="600"
+      style="border: 1px solid grey"
+    ></canvas>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      //Canvas
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+
+      //socket
+      const socket = io();
+
+      socket.on("connect", () => {
+        console.log("El front se ha conectado al socket correctamente");
+      });
+
+      socket.on("bola1", (data) => {
+        console.log("Front - Conectado a la bola 1", data);
+        drawCircle(data, 'blue');
+      });
+
+      socket.on("bola2", (data) => {
+        console.log("Front - Conectado a la bola 2", data);
+        drawCircle(data,'green');
+      });
+
+      socket.on("bola3", (data) => {
+        console.log("Front - Conectado a la bola 3", data);
+        drawCircle(data, "red");
+      });
+
+      socket.on("clean_canvas", (data) => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      });
+
+      function drawCircle(data, color) {
+        let x = data[0];
+        let y = data[1];
+        ctx.beginPath();
+        ctx.arc(x, y, 30, 0, 2 * Math.PI);
+        ctx.fillStyle = color;
+        ctx.fill();
+        ctx.stroke();
+      }
+
+    </script>
+  </body>
+</html>
