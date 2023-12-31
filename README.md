@@ -14,6 +14,5 @@ Rendering real time coords of balls in an async thread
 
 _____
 
-![Imagen](https://i.ibb.co/ZmVF2ST/bolas1.png)
 
 [![GIF](https://s13.gifyu.com/images/SjVFW.gif)](https://gifyu.com/image/SjVFW)
